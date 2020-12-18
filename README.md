@@ -1,2 +1,2 @@
-# budget-tracker
+# Budget Tracker
 Budget Tracking App
