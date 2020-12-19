@@ -1,7 +1,10 @@
 body {
   font-size: 120%;
   font-family: Arial;
+  background-color: lightsteelblue;
 }
+
+
 
 button, input {
   font-size: 100%;
