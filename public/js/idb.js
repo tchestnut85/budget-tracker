@@ -1,23 +1,29 @@
 let db;
 const request = indexedDB.open('budget_tracker', 1);
+
+// 
 request.onupgradeneeded = function (event) {
     const db = event.target.result;
     db.createObjectStore('budget_entry', { autoIncrement: true });
 };
+
 request.onsuccess = function (event) {
     db = event.target.result;
     if (navigator.onLine) {
         uploadBudget();
     }
 };
+
 request.onerror = function (event) {
     console.log(event.target.errorCode);
 };
+
 function saveBudget(entry) {
     const transaction = db.transaction(['budget_entry'], 'readwrite');
     const budgetStore = transaction.objectStore('budget_entry');
     budgetStore.add(entry);
 }
+
 function uploadBudget() {
     const transaction = db.transaction(['budget_entry'], 'readwrite');
     const budgetStore = transaction.objectStore('budget_entry');
@@ -48,5 +54,6 @@ function uploadBudget() {
         }
     };
 }
+
 // Event Listener for the app coming back online
 window.addEventListener('online', uploadBudget);
